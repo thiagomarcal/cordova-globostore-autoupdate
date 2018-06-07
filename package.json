@@ -1,0 +1,29 @@
+{
+  "name": "globostore-autoupdate-plugin",
+  "version": "1.0.0",
+  "description": "Globostore AutoUpdate Plugin",
+  "cordova": {
+    "id": "globostore-autoupdate-plugin",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagomarcal/cordova-globostore-autoupdate.git"
+  },
+  "keywords": [
+    "cordova",
+    "device",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Thiago Marçal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thiagomarcal/cordova-globostore-autoupdate/issues"
+  },
+  "homepage": "https://github.com/thiagomarcal/cordova-globostore-autoupdate#readme"
+}
