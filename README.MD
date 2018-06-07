@@ -29,7 +29,6 @@ for example, in index.html:
         }
 
         function onDeviceReady() {
-            StatusBar.overlaysWebView(false);
             window.GlobostoreAutoUpdate.check('version', function () {})
         }
     </script>
