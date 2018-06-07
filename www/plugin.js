@@ -8,8 +8,7 @@ const PLUGIN_NAME = 'GlobostoreAutoUpdate'
  * @constructor
  */
 let GlobostoreAutoUpdate = {
-    echo: (phrase, cb) => exec(cb, null, PLUGIN_NAME, 'echo', [phrase]),
-    getDate: (cb) => exec(cb, null, PLUGIN_NAME, 'getDate', [])
+    check: (phrase, cb) => exec(cb, null, PLUGIN_NAME, 'check', [phrase]),
 };
     
 module.exports = GlobostoreAutoUpdate;
