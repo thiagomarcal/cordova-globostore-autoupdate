@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="globostore-autoupdate-plugin"
+    version="1.0.0">
+    <name>Globostore AutoUpdate</name>
+    <description>Globostore AutoUpdate Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,device</keywords>
+    <repo>https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git</repo>
+    <issue>https://issues.apache.org/jira/browse/CB/component/12320648</issue>
+
+    <js-module src="www/plugin.js" name="plugin">
+        <clobbers target="GlobostoreAutoUpdate" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+                
+        <source-file src="src/android/RequestVersion.java"
+            target-dir="src/br/com/globostore/autoupdate" />
+
+        <source-file src="src/android/UpdateApp.java"
+            target-dir="src/br/com/globostore/autoupdate" />
+
+        <source-file src="src/android/Version.java"
+            target-dir="src/br/com/globostore/autoupdate" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="GlobostoreAutoUpdate" >
+                <param name="android-package" value="br.com.globostore.autoupdate.GlobostoreAutoUpdate"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/GlobostoreAutoUpdate.java" target-dir="src/br/com/globostore/autoupdate" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="GlobostoreAutoUpdate">
+                <param name="ios-package" value="GlobostoreAutoUpdate" onload="true"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/GlobostoreAutoUpdate.h" />
+        <source-file src="src/ios/GlobostoreAutoUpdate.m" />
+    </platform>
+
+</plugin>
