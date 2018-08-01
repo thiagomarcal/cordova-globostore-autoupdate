@@ -76,8 +76,10 @@ public class RequestVersion extends AsyncTask<String , Void ,Version> {
                 throw new Exception();
             }
 
-        } catch (JSONException | IOException e) {
-            e.printStackTrace();
+        } catch (JSONException je) { 
+            je.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
