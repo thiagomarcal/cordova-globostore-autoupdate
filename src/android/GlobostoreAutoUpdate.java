@@ -92,7 +92,7 @@ public class GlobostoreAutoUpdate extends CordovaPlugin {
      * @param buttonLabel     The label of the button
      * @param callbackContext The callback context
      */
-    public synchronized void alert(final String message, final String title, final String buttonLabel, final CallbackContext callbackContext, Version version) {
+    public synchronized void alert(final String message, final String title, final String buttonLabel, final CallbackContext callbackContext, final Version version) {
         final CordovaInterface cordova = this.cordova;
 
         Runnable runnable = new Runnable() {
