@@ -67,7 +67,8 @@ public class GlobostoreAutoUpdate extends CordovaPlugin {
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        Context ctx = cordova.getContext();
+        //Context ctx = cordova.getContext();
+        Context ctx = this.cordova.getActivity().getApplicationContext();
         int identifier = ctx.getResources().getIdentifier("config", "xml", ctx.getPackageName());
         mapa = loadConfigsFromXml(ctx.getResources(), identifier);
 
