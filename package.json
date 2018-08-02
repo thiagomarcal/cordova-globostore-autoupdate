@@ -1,6 +1,6 @@
 {
   "name": "globostore-autoupdate-plugin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Globostore AutoUpdate Plugin",
   "cordova": {
     "id": "globostore-autoupdate-plugin",
