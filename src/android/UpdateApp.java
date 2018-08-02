@@ -11,9 +11,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.Exception;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import org.apache.cordova.CallbackContext;
 import java.net.URL;
+
+import android.os.StrictMode;
 import android.util.Log;
 
 public class UpdateApp extends AsyncTask<String, Void, Void> {
@@ -32,6 +35,7 @@ public class UpdateApp extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... arg0) {
         String apkurl = arg0[0];
         String outputFileName = "install.apk";
+        checkFileUriExposure();
         try {
             URL url = new URL(apkurl);
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
@@ -83,5 +87,16 @@ public class UpdateApp extends AsyncTask<String, Void, Void> {
             Log.e(GlobostoreAutoUpdate.TAG, "Error during processing", e);
         }
         return null;
+    }
+
+    private void checkFileUriExposure() {
+        if (android.os.Build.VERSION.SDK_INT >= 24) {
+            try {
+                Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                m.invoke(null);
+            } catch (Exception e) {
+                Log.e(GlobostoreAutoUpdate.TAG, "Error on disableing FileUriExposure for Android Build >= 24", e);
+            }
+        }
     }
 }
