@@ -108,7 +108,7 @@ public class GlobostoreAutoUpdate extends CordovaPlugin {
                                 dialog.dismiss();
                                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, 0));
                                 UpdateApp update = new UpdateApp();
-                                update.setContext(cordova.getContext());
+                                update.setContext(cordova.getActivity().getApplicationContext());
                                 update.setCallback(callbackContext);
                                 update.execute("https://download.globostore.apps.tvglobo.com.br/" + version.getDownloadUrl());
                             }
