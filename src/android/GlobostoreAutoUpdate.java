@@ -76,7 +76,7 @@ public class GlobostoreAutoUpdate extends CordovaPlugin {
         if ("check".equals(action)) {
             Version remote = checkRemoteVersion();
 
-            if (!remote.getVersion().equals(checkCurrentVersion())) {
+            if (!remote.getVersion().equals(checkCurrentVersion(ctx))) {
                 this.alert("Atualização", "Nova versão disponível", "OK", callbackContext, remote);
             }
         }
@@ -162,12 +162,12 @@ public class GlobostoreAutoUpdate extends CordovaPlugin {
 
     }
 
-    private String checkCurrentVersion() {
+    private String checkCurrentVersion(Context ctx) {
 
         String currentVersion = null;
 
         try {
-            PackageInfo pInfo = this.cordova.getContext().getPackageManager().getPackageInfo(this.cordova.getContext().getPackageName(), 0);
+            PackageInfo pInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
             currentVersion = pInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
