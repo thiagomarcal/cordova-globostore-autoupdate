@@ -1,36 +1,36 @@
 package br.com.globostore.autoupdate;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.PluginResult;
-import org.apache.cordova.CordovaInterface;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
-
 import android.widget.TextView;
+
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GlobostoreAutoUpdate extends CordovaPlugin {
     public static final String TAG = "GlobostoreAutoUpdate";
@@ -104,13 +104,34 @@ public class GlobostoreAutoUpdate extends CordovaPlugin {
                 dlg.setCancelable(true);
                 dlg.setPositiveButton(buttonLabel,
                         new AlertDialog.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                            public void onClick(final DialogInterface dialog, int which) {
+
+                                final ProgressDialog progress = new ProgressDialog(cordova.getActivity());
+                                progress.setMessage("Atualizando...");
+                                progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                                progress.setIndeterminate(false);
+                                progress.setMax(100);
+                                progress.setProgress(0);
+                                progress.show();
+
+                                Handler mHandler = new Handler(Looper.getMainLooper()) {
+                                    @Override
+                                    public void handleMessage(Message message) {
+                                        Log.v(GlobostoreAutoUpdate.TAG, "%" + message.what);
+                                        progress.setProgress(message.what);
+                                        if (message.what == 100) progress.dismiss();
+                                    }
+                                };
+
                                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, 0));
                                 UpdateApp update = new UpdateApp();
                                 update.setContext(cordova.getActivity().getApplicationContext());
                                 update.setCallback(callbackContext);
+                                update.setHandler(mHandler);
                                 update.execute("https://download.globostore.apps.tvglobo.com.br/" + version.getDownloadUrl());
+
+
+
                             }
                         });
                 dlg.setOnCancelListener(new AlertDialog.OnCancelListener() {
@@ -221,6 +242,8 @@ public class GlobostoreAutoUpdate extends CordovaPlugin {
         }
         return null;
     }
+
+
 
 
 }
