@@ -35,6 +35,23 @@
             </feature>
         </config-file>
 
+        <config-file target="AndroidManifest.xml" parent="/manifest/">
+            <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/">
+            <provider android:authorities=".FileProvider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider" android:windowSoftInputMode="stateHidden|adjustResize">
+                <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths" />
+            </provider>
+        </config-file>
+
+        <framework src="androidx.constraintlayout:constraintlayout:1.1.3"/>
+        <framework src="androidx.appcompat:appcompat:1.2.0"/>
+
+        <resource-file src="xml/filepaths.xml" target="res/xml/filepaths.xml"/>
+
         <source-file src="src/android/GlobostoreAutoUpdate.java" target-dir="src/br/com/globostore/autoupdate" />
     </platform>
 
