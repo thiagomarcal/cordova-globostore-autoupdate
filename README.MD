@@ -4,12 +4,14 @@ A library which provides auto-update feature to any hibrid (Android and IOS) cor
 
 ## Installation
 
-Add the plugin to your cordova project:
+Add the plugins to your cordova project:
 ```shell
 $ cordova plugin add globostore-autoupdate-plugin
+$ cordova plugin add cordova-plugin-androidx
+$ cordova plugin add cordova-plugin-androidx-adapter
 ```
 
-In config.xml add this lines:
+In config.xml add this lines inside parent widget:
 ```xml
     <preference name="appId" value="<< your_app_id >>" />
     <preference name="appKey" value="<< your_app_key >>" />
