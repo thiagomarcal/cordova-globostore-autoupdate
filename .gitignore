@@ -11,6 +11,8 @@ Thumbs.db
 *.log
 *.swp
 *.user
+.gradle
+.idea
 
 node_modules
 
